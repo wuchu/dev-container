@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  toolchain:
+    container_name: toolchain
+    build: .
+    volumes:
+      - E:/linux/projects:/root/projects:rw
+      - E:/Downloads:/root/downloads:rw
+    ports:
+      - "4003:4003"
+    networks:
+      - vscode-bridge
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+  plantuml:
+    container_name: plantuml
+    image: plantuml/plantuml-server:jetty
+    ports:
+      - "8080:8080"
+    networks:
+      - vscode-bridge
+
+networks:
+  vscode-bridge:
